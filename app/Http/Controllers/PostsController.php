@@ -26,18 +26,17 @@ class PostsController extends Controller
 
     public function index()
     {
-        // $posts = Post::all();
-        // $row1 = DB::select('select * from posts ORDER BY created_at DESC LIMIT 2');
+       
         $row1 = Post::limit(2)->get();
-        // $row2 = DB::select('select * from posts ORDER BY created_at DESC LIMIT 2,3');
+        
         $row2 = Post::offset(2)->limit(3)->get();
-        // $row3 = DB::select('select * from posts ORDER BY created_at DESC LIMIT 5,3');
+        
         $row3 = Post::offset(5)->limit(3)->get();
-        // $row4 = DB::select('select * from posts ORDER BY created_at DESC LIMIT 8,1');
+        
         $row4 = Post::offset(8)->limit(1)->get();
-        // $row5 = DB::select('select * from posts ORDER BY created_at DESC LIMIT 9,2');
+        
         $row5 = Post::offset(9)->limit(2)->get();
-        // $row6 = DB::select('select * from posts ORDER BY created_at DESC LIMIT 11,2');
+        
         $row6 = Post::offset(11)->limit(2)->get();
         
         return view('mag.home', compact('row1','row2','row3','row4','row5','row6'));
