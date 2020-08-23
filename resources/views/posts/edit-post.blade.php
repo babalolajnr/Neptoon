@@ -38,7 +38,7 @@
                   @method('PATCH')
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Title</label>
+                      <label for="Title">Title</label>
                       <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"  placeholder="" value="{{ $post->title }}">
                       @error('title')
                       <span class="invalid-feedback" role="alert">

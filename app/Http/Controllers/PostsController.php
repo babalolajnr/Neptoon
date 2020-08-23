@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use App\User;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,20 +25,21 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
+    //Show all the posts on the front-end template
     public function index()
     {
        
-        $row1 = Post::limit(2)->get();
+        $row1 = Post::where('publish_status', 1)->limit(2)->orderBy('published_at', 'desc')->get();
         
-        $row2 = Post::offset(2)->limit(3)->get();
+        $row2 = Post::where('publish_status', 1)->offset(2)->limit(3)->orderBy('published_at', 'desc')->get();
         
-        $row3 = Post::offset(5)->limit(3)->get();
+        $row3 = Post::where('publish_status', 1)->offset(5)->limit(3)->orderBy('published_at', 'desc')->get();
         
-        $row4 = Post::offset(8)->limit(1)->get();
+        $row4 = Post::where('publish_status', 1)->offset(8)->limit(1)->orderBy('published_at', 'desc')->get();
         
-        $row5 = Post::offset(9)->limit(2)->get();
+        $row5 = Post::where('publish_status', 1)->offset(9)->limit(2)->orderBy('published_at', 'desc')->get();
         
-        $row6 = Post::offset(11)->limit(2)->get();
+        $row6 = Post::where('publish_status', 1)->offset(11)->limit(2)->orderBy('published_at', 'desc')->get();
         
         return view('mag.home', compact('row1','row2','row3','row4','row5','row6'));
     }
@@ -100,7 +102,7 @@ class PostsController extends Controller
      */
     public function show($slug)
     {
-        // $blogPost = DB::table('posts')->where('slug', $slug)->get();
+        $blogPost = Post::where('slug', $slug)->get();
       
         return view('mag.show', compact('blogPost'));
     }
@@ -208,5 +210,32 @@ class PostsController extends Controller
 
         $allPosts = Post::all();
         return view('posts.all-posts', compact('allPosts'));
+    }
+
+    //Display all drafts
+    public function drafts() {
+        $drafts = Post::where('publish_status', 0)->get();
+        return view ('posts.drafts', compact('drafts'));
+    }
+
+    //Publish Posts
+    public function publish($id) {
+      
+        $published = Carbon::now();
+        $published = $published->toDateTimeString();
+
+        Auth::user()->post()->where("id", $id)->update([
+            "publish_status" => 1,
+            "published_at" => $published
+        ]);
+
+        return redirect()->route('livePosts')->with('success', 'Post published successfully');
+    }
+
+    //Display Live Posts
+    public  function getLivePosts() {
+        $livePosts = Post::where('publish_status', 1)->orderBy('published_at', 'desc')->get();
+
+        return view ('posts.live-posts', compact('livePosts'));
     }
 }

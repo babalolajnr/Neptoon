@@ -5,6 +5,7 @@
     <div class="section">
         <!-- container -->
         <div class="container">
+            @if ($row1)
             @foreach ($row1 as $row)  
 
             <!-- row -->
@@ -16,7 +17,7 @@
                         <div class="post-body">
                             <div class="post-meta">
                                 <a class="post-category cat-2" href="/mag/show/{{ $row->slug }}">{{ $row->category->name }}</a>
-                                <span class="post-date">{{ $row->created_at }}</span>
+                                <span class="post-date">{{ $row->created_at->format('d M Y') }}</span>
                             </div>
                             <h3 class="post-title"><a href="/mag/show/{{ $row->slug }}">{{ $row->title }}</a></h3>
                         </div>
@@ -25,6 +26,9 @@
                 
                 @endforeach
                 <!-- /post -->
+           
+            @endif
+           
 
             </div>
             <!-- /row -->
@@ -159,24 +163,10 @@
                         @endforeach
                         @endif
 
-                        <!-- post -->
-                        {{-- <div class="col-md-6">
-                            <div class="post">
-                                <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ $posts[13]->image }}" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-meta">
-                                        <a class="post-category cat-4" href="/mag/show/{{ $row->id }}">{{ $posts[13]->category }}</a>
-                                        <span class="post-date">{{ $posts[13]->created_at }}</span>
-                                    </div>
-                                    <h3 class="post-title"><a href="/mag/show/{{ $row->id }}">{{ $posts[13]->title }}</a></h3>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <!-- /post -->
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <!-- post widget -->
                     <div class="aside-widget">
                         <div class="section-title">
@@ -249,7 +239,7 @@
                         </a>
                     </div>
                     <!-- /ad -->
-                </div>
+                </div> --}}
             </div>
             <!-- /row -->
         </div>
@@ -270,7 +260,7 @@
                 </div>
 
                 <!-- post -->
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div class="post">
                         <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-4.jpg') }}" alt=""></a>
                         <div class="post-body">
@@ -281,11 +271,11 @@
                             <h3 class="post-title"><a href="/mag/show/{{ $row->id }}">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- /post -->
 
                 <!-- post -->
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div class="post">
                         <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-5.jpg') }}" alt=""></a>
                         <div class="post-body">
@@ -296,11 +286,11 @@
                             <h3 class="post-title"><a href="/mag/show/{{ $row->id }}">Ask HN: Does Anybody Still Use JQuery?</a></h3>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- /post -->
 
                 <!-- post -->
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div class="post">
                         <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-3.jpg') }}" alt=""></a>
                         <div class="post-body">
@@ -311,7 +301,7 @@
                             <h3 class="post-title"><a href="/mag/show/{{ $row->id }}">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- /post -->
             </div>
             <!-- /row -->
@@ -334,7 +324,7 @@
                             </div>
                         </div>
                         <!-- post -->
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             <div class="post post-row">
                                 <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-4.jpg') }}" alt=""></a>
                                 <div class="post-body">
@@ -346,11 +336,11 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- /post -->
 
                         <!-- post -->
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             <div class="post post-row">
                                 <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-6.jpg') }}" alt=""></a>
                                 <div class="post-body">
@@ -362,11 +352,11 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- /post -->
 
                         <!-- post -->
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             <div class="post post-row">
                                 <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-1.jpg') }}" alt=""></a>
                                 <div class="post-body">
@@ -378,11 +368,11 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- /post -->
                         
                         <!-- post -->
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             <div class="post post-row">
                                 <a class="post-img" href="/mag/show/{{ $row->id }}"><img src="{{ asset('blog/img/post-2.jpg') }}" alt=""></a>
                                 <div class="post-body">
@@ -394,7 +384,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- /post -->
                         
                         <div class="col-md-12">

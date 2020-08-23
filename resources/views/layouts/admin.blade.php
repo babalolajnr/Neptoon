@@ -239,6 +239,18 @@
                                         <p>All Posts</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('drafts') }}" class="nav-link {{ Request::is('posts/drafts') ? 'active' : ''  }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Drafts</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('livePosts') }}" class="nav-link {{ Request::is('posts/livePosts') ? 'active' : ''  }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Live Posts</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item has-treeview">

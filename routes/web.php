@@ -24,13 +24,18 @@ Auth::routes();
 //Front end  Home route
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
 // All  the routes related to the post model
 Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/posts/allPosts', 'PostsController@getAll')->name('allPosts');
+Route::get('/posts/livePosts', 'PostsController@getlivePosts')->name('livePosts');
+Route::get('/posts/drafts', 'PostsController@drafts')->name('drafts');
 Route::get('/posts/create', 'PostsController@create')->name('addPost');
 Route::post('/posts/store', 'PostsController@store')->name('storePost');
 Route::get('/posts/edit/{id}', 'PostsController@edit');
 Route::patch('/posts/update/{id}', 'PostsController@update');
+Route::patch('/posts/publish/{id}', 'PostsController@publish');
 Route::delete('/posts/delete/{id}', 'PostsController@destroy');
 
 //All the rotes related to the Categories Model 

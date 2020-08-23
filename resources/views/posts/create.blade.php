@@ -30,7 +30,7 @@
                       <span aria-hidden="true">&times;</span>
                       <span class="sr-only">Close</span>
                     </button>
-                    <strong>Success!!😍</strong> {{ session('message') }}
+                    <strong>Success!!😍</strong> {{ session('success') }}
                   </div>
               @endif
               <!-- jquery validation -->

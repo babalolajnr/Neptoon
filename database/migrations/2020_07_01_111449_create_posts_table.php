@@ -24,7 +24,8 @@ class CreatePostsTable extends Migration
             $table->longText('body');
             $table->bigInteger('views')->default(0);
             $table->bigInteger('likes')->default(0);
-
+            $table->string('published_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
