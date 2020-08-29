@@ -16,7 +16,7 @@
       </button>
       <span><strong>Success!!😍</strong> {{ session('success') }}</span>
     </div>
-@endif
+    @endif
       <h3 class="card-title">All Posts</h3>
     </div>
     <!-- /.card-header -->

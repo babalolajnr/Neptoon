@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::get('/blog', 'PostsController@show')->name('blogHome');
-Route::get('/mag', 'PostsController@index')->name('blogHome');
-Route::get('/mag/show/{slug}', 'PostsController@show')->name('blogShow');
+// Route::get('/mag', 'PostsController@index')->name('blogHome');
+// Route::get('/mag/show/{slug}', 'PostsController@show')->name('blogShow');
+Route::get('/index', 'FrontendController@index');
 
 Route::get('/', function () {
     return view('admin.welcome');
@@ -33,15 +34,21 @@ Route::get('/posts/livePosts', 'PostsController@getlivePosts')->name('livePosts'
 Route::get('/posts/drafts', 'PostsController@drafts')->name('drafts');
 Route::get('/posts/create', 'PostsController@create')->name('addPost');
 Route::post('/posts/store', 'PostsController@store')->name('storePost');
+Route::post('/post/feature/{id}', 'FeaturePostController@featurePost');
 Route::get('/posts/edit/{id}', 'PostsController@edit');
 Route::patch('/posts/update/{id}', 'PostsController@update');
 Route::patch('/posts/publish/{id}', 'PostsController@publish');
 Route::delete('/posts/delete/{id}', 'PostsController@destroy');
 
-//All the rotes related to the Categories Model 
+//All the routes related to the Categories Model 
 Route::get('/categories', 'CategoriesController@index')->name('categories');
 Route::get('/categories/create', 'CategoriesController@create')->name('addCategory');
 Route::post('/categories/store', 'CategoriesController@store')->name('storeCategory');
+
+//Profile routes
+Route::get('/profile', 'ProfilesController@index')->name('profile');
+Route::patch('/profile/update', 'ProfilesController@update');
+Route::patch('/profile/updateAvatar', 'ProfilesController@updateAvatar');
 
 
 

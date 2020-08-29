@@ -16,7 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'username', 'avatar', 'email', 'password', 'headline', 'bio', 'country' 
+        'firstName', 'lastName', 'username', 
+        'avatar', 'email', 'password', 'headline', 
+        'bio', 'location', 'skills', 'experience'  
     ];
 
     /**
@@ -46,5 +48,10 @@ class User extends Authenticatable
     public function category()
     {
         return $this->hasMany('App\Category');
+    }
+
+    public function featuredPost()
+    {
+        return $this->hasMany('App\FeaturedPost');
     }
 }

@@ -40,4 +40,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    //get featured posts
+    public function featuredPost()
+    {
+        return $this->hasMany('App\FeaturedPost');
+    }
 }

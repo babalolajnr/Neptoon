@@ -8,5 +8,5 @@ class CommentReply extends Model
 {
     protected $table = 'comment_reply';
 
-    protected $guarded
+    protected $guarded 
 }

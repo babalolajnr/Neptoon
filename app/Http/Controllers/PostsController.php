@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\FeaturedPost;
 use App\Post;
 use App\User;
 use Carbon\Carbon;
@@ -28,20 +29,7 @@ class PostsController extends Controller
     //Show all the posts on the front-end template
     public function index()
     {
-       
-        $row1 = Post::where('publish_status', 1)->limit(2)->orderBy('published_at', 'desc')->get();
-        
-        $row2 = Post::where('publish_status', 1)->offset(2)->limit(3)->orderBy('published_at', 'desc')->get();
-        
-        $row3 = Post::where('publish_status', 1)->offset(5)->limit(3)->orderBy('published_at', 'desc')->get();
-        
-        $row4 = Post::where('publish_status', 1)->offset(8)->limit(1)->orderBy('published_at', 'desc')->get();
-        
-        $row5 = Post::where('publish_status', 1)->offset(9)->limit(2)->orderBy('published_at', 'desc')->get();
-        
-        $row6 = Post::where('publish_status', 1)->offset(11)->limit(2)->orderBy('published_at', 'desc')->get();
-        
-        return view('mag.home', compact('row1','row2','row3','row4','row5','row6'));
+        //
     }
 
     /**
@@ -66,9 +54,9 @@ class PostsController extends Controller
         //validation
         $this->validate($request, array(
             'title' => 'required|min:2',
-            'body' => 'required',
+            'body' => 'required|min: 100',
             'category' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            'image' => 'required|image|mimes:jpeg,png,jpg'
         ));
 
         //Process the uploaded image
@@ -235,7 +223,7 @@ class PostsController extends Controller
     //Display Live Posts
     public  function getLivePosts() {
         $livePosts = Post::where('publish_status', 1)->orderBy('published_at', 'desc')->get();
-
-        return view ('posts.live-posts', compact('livePosts'));
+        $featuredPosts = FeaturedPost::all();
+        return view ('posts.live-posts', compact('livePosts','featuredPosts'));
     }
 }
