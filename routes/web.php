@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/blog', 'PostsController@show')->name('blogHome');
-// Route::get('/mag', 'PostsController@index')->name('blogHome');
-// Route::get('/mag/show/{slug}', 'PostsController@show')->name('blogShow');
 Route::get('/index', 'FrontendController@index');
+Route::get('/post/{slug}', 'FrontendController@show');
+Route::post('/addComment', 'CommentsController@store');
 
 Route::get('/', function () {
     return view('admin.welcome');
@@ -28,8 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // All  the routes related to the post model
-Route::get('/posts', 'PostsController@index')->name('posts');
-Route::get('/posts/allPosts', 'PostsController@getAll')->name('allPosts');
+// Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/posts/livePosts', 'PostsController@getlivePosts')->name('livePosts');
 Route::get('/posts/drafts', 'PostsController@drafts')->name('drafts');
 Route::get('/posts/create', 'PostsController@create')->name('addPost');

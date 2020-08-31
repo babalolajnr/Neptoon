@@ -54,10 +54,10 @@
                         <div class="btn-group">
                             <a href="{{ url('posts/edit/' .$post->id) }}"><button type="button" title="Edit"
                                     class="btn btn-warning btn-flat"><i class="fas fa-edit"></i></button></a>
-                            <form action="/posts/delete/{{ $post->id }}" method="POST" enctype="multipart/form-data">
+                            <form action="/posts/delete/{{ $post->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" title="Delete" class="btn btn-danger btn-flat"><i
+                                <button type="submit" title="Delete" class="btn btn-danger btn-flat"><i
                                         class="fas fa-trash"></i></button>
                             </form>
                             @if ($featuredPosts->contains('post_id', $post->id))

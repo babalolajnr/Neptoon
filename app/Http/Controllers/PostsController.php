@@ -59,10 +59,15 @@ class PostsController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg'
         ));
 
-        //Process the uploaded image
-        $request->file('image')->move(public_path('storage/uploads'),
-        $request->file('image')->getClientOriginalName());
+        //Process the uploaded image without resizing the image
+        // $request->file('image')->move(public_path('storage/uploads'),
+        // $request->file('image')->getClientOriginalName());
+        // $request->image = 'storage/uploads/' . $request->file('image')->getClientOriginalName();
+
+        // Process the image and resize to 750x450
         $request->image = 'storage/uploads/' . $request->file('image')->getClientOriginalName();
+        $image = Image::make($request->file('image')->getRealPath())->fit(750,450);
+        $image->save($request->image); 
    
         //get the id of the category selected from the categories table
         $category_id = DB::table('categories')->where('name', $request->category)->get('id');
@@ -74,11 +79,12 @@ class PostsController extends Controller
             'category_id' => $category_id[0]->id,
             'publish_status' => false,
             'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
+            // 'image' => $request->image
             'image' => $request->image
         ]);
 
 
-        return redirect()->route('addPost')->with('success', 'Post created successfully');
+        return redirect()->route('drafts')->with('success', 'Post drafted successfully');
         
     }
 
@@ -118,7 +124,7 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
       
-        $post = Post::find($id);
+        // $post = Post::find($id);
         //validation
          if($request->image) {
              
@@ -130,9 +136,14 @@ class PostsController extends Controller
             ));
     
             //Process the uploaded image
-            $request->file('image')->move(public_path('storage/uploads'),
-            $request->file('image')->getClientOriginalName());
+            // $request->file('image')->move(public_path('storage/uploads'),
+            // $request->file('image')->getClientOriginalName());
+            // $request->image = 'storage/uploads/' . $request->file('image')->getClientOriginalName();
+
+            // Process the image and resize to 750x450
             $request->image = 'storage/uploads/' . $request->file('image')->getClientOriginalName();
+            $image = Image::make($request->file('image')->getRealPath())->fit(750,450);
+            $image->save($request->image); 
        
             //get the id of the category selected from the categories table
             $category = Category::where('name', $request->category)->first();
@@ -147,7 +158,7 @@ class PostsController extends Controller
                 "image" => $request->image,
             ]);
 
-            return redirect()->route('allPosts')->with('success', 'Post updated successfully');
+            return redirect('/posts/edit/'.$id)->with('success', 'Post "'.$request->title.'" updated successfully');
 
            
          }
@@ -172,7 +183,7 @@ class PostsController extends Controller
                 "slug" => SlugService::createSlug(Post::class, 'slug', $request->title)
             ]);
 
-            return redirect()->route('allPosts')->with('success', 'Post updated successfully');
+            return redirect('/posts/edit/'.$id)->with('success', 'Post "'.$request->title.'" updated successfully');
 
            
          }
@@ -190,14 +201,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        return redirect()->route('allPosts')->with('success', 'Post deleted successfully');
-    }
-
-    //Display all posts in a table in the all posts page
-    public function getAll(){
-
-        $allPosts = Post::all();
-        return view('posts.all-posts', compact('allPosts'));
+        return redirect()->back()->with('success', 'Post deleted successfully');
     }
 
     //Display all drafts
@@ -217,7 +221,7 @@ class PostsController extends Controller
             "published_at" => $published
         ]);
 
-        return redirect()->route('livePosts')->with('success', 'Post published successfully');
+        return redirect()->back()->with('success', 'Post published successfully');
     }
 
     //Display Live Posts

@@ -6,6 +6,7 @@ use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use  Intervention\Image\Facades\Image;
 
 
 class ProfilesController extends Controller
@@ -123,9 +124,15 @@ class ProfilesController extends Controller
         ));
 
         //Process the uploaded image
-        $request->file('avatar')->move(public_path('storage/avatar'),
-        $request->file('avatar')->getClientOriginalName());
-        $request->avatar = 'storage/avatar/' . $request->file('avatar')->getClientOriginalName();
+        // $request->file('avatar')->move(public_path('storage/avatar'),
+        // $request->file('avatar')->getClientOriginalName());
+        // $request->avatar = 'storage/avatar/' . $request->file('avatar')->getClientOriginalName();
+
+        // Process the image and resize to 750x450
+        $request->avatar = 'storage/uploads/' . $request->file('avatar')->getClientOriginalName();
+        $avatar = Image::make($request->file('avatar')->getRealPath())->fit(128,128);
+        $avatar->save($request->avatar); 
+        
 
         Auth::user()->where("id", $user_id)->update([
             'avatar' => $request->avatar

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\FeaturedPost;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,9 +16,25 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $bannerPosts = Post::where("publish_status", 1)->get();
-
-        return view("front-end.index", compact('bannerPosts'));
+        
+        $featuredPosts = FeaturedPost::latest()->limit(2)->get();
+        $recentPosts1 = Post::where('publish_status', 1)
+                        ->orderBy('published_at', 'desc')->limit(3)->get();
+        $recentPosts2 = Post::where('publish_status', 1)
+                        ->orderBy('published_at', 'desc')->offset(3)->limit(3)->get();
+        $recentPosts3 = Post::where('publish_status', 1)
+                        ->orderBy('published_at', 'desc')->offset(6)->limit(1)->get();
+        $recentPosts4 = Post::where('publish_status', 1)
+                        ->orderBy('published_at', 'desc')->offset(7)->limit(2)->get();
+        $recentPosts5 = Post::where('publish_status', 1)
+                        ->orderBy('published_at', 'desc')->offset(9)->limit(2)->get();
+        $recentPosts6 = Post::where('publish_status', 1)
+                        ->orderBy('published_at', 'desc')->offset(11)->limit(2)->get();
+        
+        return view("front-end.index", 
+                    compact('featuredPosts', 'recentPosts1', 
+                            'recentPosts2', 'recentPosts3', 
+                            'recentPosts4', 'recentPosts5', 'recentPosts6'));
     }
 
     /**
@@ -46,9 +64,20 @@ class FrontendController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($slug)
+    { 
+        // $post = Post::find($slug);
+        $post = Post::where('slug', $slug)->first();
+
+        // get post views and update
+        $postViews = $post->views;
+        $postViews++;
+        Post::where('slug', $slug)->update([
+            'views' => $postViews
+        ]);
+         
+        $comment = Comment::where('post_id', $post->id)->get();
+        return view('front-end.single-post', compact('post', 'comment'));
     }
 
     /**

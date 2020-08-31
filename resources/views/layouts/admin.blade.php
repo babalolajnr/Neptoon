@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Neptune</title>
+    <title>Neptune | Admin</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -170,7 +170,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="b{{ route('home') }}" class="brand-link">
+            <a href="{{ route('home') }}" class="brand-link">
                 <img src="{{ asset('logo/neptune2-favicon.png') }}" alt="Neptune logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Neptune</span>
@@ -181,7 +181,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ Auth::user()->avatar }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="/{{ Auth::user()->avatar }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->username }}</a>
@@ -226,13 +226,7 @@
                                         <p>View Posts</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('allPosts') }}"
-                                        class="nav-link {{ Request::is('posts/allPosts') ? 'active' : ''  }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>All Posts</p>
-                                    </a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a href="{{ route('drafts') }}"
                                         class="nav-link {{ Request::is('posts/drafts') ? 'active' : ''  }}">
